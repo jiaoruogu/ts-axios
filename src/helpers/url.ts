@@ -1,5 +1,4 @@
-import { log } from "console"
-import { isDate, isObject } from "./util"
+import { isDate, isPlainObject } from "./util"
 
 function encode(val: string): string {
   return encodeURIComponent(val)
@@ -22,11 +21,11 @@ export const buildURL = (url: string, params?:any) => {
     url = url.slice(0, index)
   }
 
-  const parats: string[] = []
+  const parts: string[] = []
 
   Object.keys(params).map(key => {
     let val = params[key]
-    // 此处undefined的判断也可以用  val === undefined 
+    // 此处undefined的判断也可以用  val === undefined
     // 而使用typeof的好处在于对一个未定义的变量使用不会报错
     if(val === null && typeof val === 'undefined') {
       return
@@ -41,22 +40,22 @@ export const buildURL = (url: string, params?:any) => {
     }
 
 
-    
+
 
     values.forEach(val => {
-      if(isDate(val)) {     
+      if(isDate(val)) {
         val = val.toISOString()
-      } else if(isObject(val)) {     
+      } else if(isPlainObject(val)) {
         val = JSON.stringify(val)
       }
 
-      parats.push(`${encode(key)}=${encode(val)}`)
+      parts.push(`${encode(key)}=${encode(val)}`)
     })
 
   })
 
-  let serializedParams = parats.join('&')
-  
+  let serializedParams = parts.join('&')
+
 
   if (serializedParams) {
     url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams
