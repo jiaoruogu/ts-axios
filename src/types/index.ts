@@ -1,5 +1,3 @@
-import { type } from 'os'
-
 export type Method =
   | 'get'
   | 'GET'
@@ -22,4 +20,16 @@ export interface AxiosRequestConfig {
   data?: any
   params?: any
   headers?: any
+  responseType?: XMLHttpRequestResponseType
 }
+
+export interface AxiosResponse {
+  status: number
+  data: any
+  statusText: string
+  headers: any
+  config: AxiosRequestConfig
+  request: any
+}
+
+export interface AxiosPromise extends Promise<AxiosResponse> {}
