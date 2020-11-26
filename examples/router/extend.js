@@ -37,5 +37,15 @@ router.patch('/extend/patch', function(req, res) {
   res.json(req.body)
 })
 
+router.get('/extend/user', function(req, res) {
+  res.json({
+    code: 200,
+    result: {
+      name: 'andychiao',
+      age: 24
+    },
+    message: '请求成功！'
+  })
+})
 
 module.exports = router
