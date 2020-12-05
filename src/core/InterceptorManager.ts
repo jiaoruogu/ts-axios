@@ -1,6 +1,6 @@
 import { ResolvedFn, RejectedFn } from '../types'
 
-export interface Interceptor<T> {
+interface Interceptor<T> {
   resolved: ResolvedFn<T>
   rejected?: RejectedFn
 }
