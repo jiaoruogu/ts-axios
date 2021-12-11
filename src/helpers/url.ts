@@ -10,7 +10,7 @@ function encode(val: string): string {
     .replace(/%5D/gi, ']')
 }
 
-function buildURL(url: string, params: any): string {
+export function buildURL(url: string, params: any): string {
   if (!params) {
     return url
   }
@@ -48,15 +48,14 @@ function buildURL(url: string, params: any): string {
 
     const index = url.indexOf('#')
     if (index > -1) {
-      url = url.slice(0, index) + serialize
+      url += url.slice(0, index) + serialize
     } else {
       // 忘记考虑原本就有参数的情况
-      url = url + '?' + serialize
+      url += (url.indexOf('?') === -1 ? '?' : '&') + serialize
     }
 
     console.log(parts)
+    console.log(url)
     return url
   }
 }
-
-buildURL('test', { test: [1, 3, 5, 6, 7, 8], fuck: { bar: 'foo' }, bar: 'foo', x: null, y: '' })
