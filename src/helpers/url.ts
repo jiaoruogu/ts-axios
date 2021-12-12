@@ -41,21 +41,16 @@ export function buildURL(url: string, params: any): string {
     })
   })
 
-  if (!parts.length) {
-    return url
-  } else {
-    let serialize = parts.join('&')
+  let serializedParams = parts.join('&')
 
-    const index = url.indexOf('#')
-    if (index > -1) {
-      url += url.slice(0, index) + serialize
-    } else {
-      // 忘记考虑原本就有参数的情况
-      url += (url.indexOf('?') === -1 ? '?' : '&') + serialize
+  if (serializedParams) {
+    const markIndex = url.indexOf('#')
+    if (markIndex > -1) {
+      url = url.slice(0, markIndex)
     }
 
-    console.log(parts)
-    console.log(url)
-    return url
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams
   }
+
+  return url
 }
