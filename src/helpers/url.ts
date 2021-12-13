@@ -25,7 +25,7 @@ export function buildURL(url: string, params: any): string {
     }
 
     if (Array.isArray(val)) {
-      key = '[]' + key
+      key += '[]'
     } else {
       val = [val]
     }
